@@ -10,4 +10,5 @@
     <color name="maroon_200">#FFFF4F6A</color>
     <color name="maroon_500">#AC1E24</color>
     <color name="maroon_700">#FF7E0B1D</color>
+    <color name="clear">#007E0B1D</color>
 </resources>
