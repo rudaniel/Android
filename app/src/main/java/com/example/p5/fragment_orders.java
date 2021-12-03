@@ -77,7 +77,7 @@ public class fragment_orders extends Fragment {
 
         autoTextView = (AutoCompleteTextView) view.findViewById(R.id.autoCompleteTextView);
 
-        adapterItems = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1 , phoneNumbers);
+        adapterItems = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1 , phoneNumbers);
 
         autoTextView.setAdapter(adapterItems);
 
