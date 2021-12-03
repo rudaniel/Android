@@ -25,7 +25,7 @@ public class OrderingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setTheme(android.R.style.Theme);
         binding = ActivityOrderingBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         Intent i=getIntent();
