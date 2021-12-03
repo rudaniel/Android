@@ -107,7 +107,7 @@ public class fragment_login extends Fragment {
                 phoneNumberString = editTextPhone.getText().toString();
 
                 if(alert(phoneNumberString)) {
-                    Intent i = new Intent(getActivity(), fragment_home.class);
+                    Intent i = new Intent(getActivity(), OrderingActivity.class);
 
                     final int result=1;
                     i.putExtra("number",phoneNumberString);

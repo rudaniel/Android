@@ -3,6 +3,8 @@ package com.example.p5;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 
-public class fragment_home extends Activity {
+public class fragment_home extends AppCompatActivity {
     TextView editTextPhone2;
 
     @Override
