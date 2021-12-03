@@ -19,4 +19,5 @@
     <string name="autocompletetextview">AutoCompleteTextView</string>
     <string name="enter_order_phone_number">Enter Order Phone Number</string>
     <string name="select_phone_number">Select Phone Number</string>
+    <string name="delete">Delete</string>
 </resources>

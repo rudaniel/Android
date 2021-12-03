@@ -1,6 +1,8 @@
 package com.example.p5;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -12,7 +14,12 @@ import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -63,11 +70,17 @@ public class fragment_orders extends Fragment {
 
 
 
-    String[] phoneNumbers = {"9084561296", "9084945104"};
+  //  ArrayList phoneNumbers = {"9084561296", "9084945104"};
+
+    ArrayList <String> phoneNumbers =  new ArrayList<String>();
+
 
     AutoCompleteTextView autoTextView;
-
     ArrayAdapter<String> adapterItems;
+    TextView phoneTextView;
+    Button deleteButton;
+    String currentNumber = "-1";
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -78,20 +91,53 @@ public class fragment_orders extends Fragment {
 
         autoTextView = (AutoCompleteTextView) view.findViewById(R.id.autoCompleteTextView);
 
+        phoneNumbers.add("9084563456");
+        phoneNumbers.add("0987654321");
         adapterItems = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1 , phoneNumbers);
 
         autoTextView.setAdapter(adapterItems);
 
-        /*
-        autoTextView.setOnClickListener(new AdapterView.OnClickListener() {
-            public void onClick(View v){
+        phoneTextView = (TextView) view.findViewById(R.id.phoneTextView);
 
+        deleteButton = (Button) view.findViewById(R.id.deleteButton);
+
+        autoTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                currentNumber = parent.getItemAtPosition(position).toString();
+
+
+
+                phoneTextView.setText(currentNumber);
+            }
+        });
+
+        deleteButton .setOnClickListener(new View.OnClickListener() { //When the button is clicked the method will run.
+            public void onClick(View v){
+                String message = "Must Select A Phone Number";
+
+                if (currentNumber == "-1"){
+                //    System.out.println(currentNumber);
+                    Toast toast=Toast.makeText(getActivity(),message, Toast.LENGTH_LONG);
+                    toast.show();
+                }
+               // System.out.println(currentNumber);
+                adapterItems.remove(currentNumber);
+                adapterItems.notifyDataSetChanged();
+                autoTextView.setAdapter(adapterItems);
+
+             //  autoTextView.setText("");
+
+                autoTextView.setText("");
+
+
+                phoneTextView.setText("");
 
 
 
             }
         });
-*/
+
         return view;
     }
 }
