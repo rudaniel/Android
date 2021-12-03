@@ -73,6 +73,7 @@ public class fragment_orders extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
         View view = inflater.inflate(R.layout.fragment_orders, container, false);
 
         autoTextView = (AutoCompleteTextView) view.findViewById(R.id.autoCompleteTextView);
