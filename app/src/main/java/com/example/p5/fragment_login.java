@@ -93,7 +93,7 @@ public class fragment_login extends Fragment {
             return false;
         }
     }
-
+//daniel
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
