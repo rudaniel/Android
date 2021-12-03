@@ -10,10 +10,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.p5.R;
 import com.example.p5.fragment_current;
-import com.example.p5.fragment_home;
-import com.example.p5.fragment_login;
 import com.example.p5.fragment_menu;
-import com.example.p5.fragment_orders;
 
 /**
  * A [FragmentPagerAdapter] that returns a fragment corresponding to
