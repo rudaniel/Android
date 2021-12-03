@@ -1,5 +1,6 @@
 package com.example.p5;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,6 +8,11 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -55,11 +61,36 @@ public class fragment_orders extends Fragment {
         }
     }
 
+
+
+    String[] phoneNumbers = {"9084561296", "9084945104"};
+
+    AutoCompleteTextView autoTextView;
+
+    ArrayAdapter<String> adapterItems;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        //daniel
-        return inflater.inflate(R.layout.fragment_orders, container, false);
+        View view = inflater.inflate(R.layout.fragment_orders, container, false);
+
+        autoTextView = (AutoCompleteTextView) view.findViewById(R.id.autoCompleteTextView);
+
+        adapterItems = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1 , phoneNumbers);
+
+        autoTextView.setAdapter(adapterItems);
+
+        /*
+        autoTextView.setOnClickListener(new AdapterView.OnClickListener() {
+            public void onClick(View v){
+
+
+
+
+            }
+        });
+*/
+        return view;
     }
 }

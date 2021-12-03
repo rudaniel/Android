@@ -20,7 +20,7 @@
         <entry key="app/src/main/res/layout/fragment_main.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/layout/fragment_menu.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/layout/fragment_ordering.xml" value="0.165" />
-        <entry key="app/src/main/res/layout/fragment_orders.xml" value="0.15070921985815602" />
+        <entry key="app/src/main/res/layout/fragment_orders.xml" value="0.25" />
       </map>
     </option>
   </component>
