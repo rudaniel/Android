@@ -59,6 +59,7 @@ public class fragment_orders extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        //daniel
         return inflater.inflate(R.layout.fragment_orders, container, false);
     }
 }
