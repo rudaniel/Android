@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -75,7 +77,7 @@ public class fragment_orders extends Fragment {
     ArrayList <String> phoneNumbers =  new ArrayList<String>();
 
 
-    AutoCompleteTextView autoTextView;
+    Spinner autoTextView;
     ArrayAdapter<String> adapterItems;
     TextView phoneTextView;
     Button deleteButton;
@@ -89,29 +91,33 @@ public class fragment_orders extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_orders, container, false);
 
-        autoTextView = (AutoCompleteTextView) view.findViewById(R.id.autoCompleteTextView);
+        autoTextView = (Spinner) view.findViewById(R.id.autoCompleteTextView);
 
         phoneNumbers.add("9084563456");
         phoneNumbers.add("0987654321");
-        adapterItems = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1 , phoneNumbers);
+
+        adapterItems = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item , phoneNumbers);
 
         autoTextView.setAdapter(adapterItems);
 
         phoneTextView = (TextView) view.findViewById(R.id.phoneTextView);
 
         deleteButton = (Button) view.findViewById(R.id.deleteButton);
-
-        autoTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        phoneTextView.setMovementMethod(new ScrollingMovementMethod());
+        autoTextView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                currentNumber = parent.getItemAtPosition(position).toString();
-
-
-
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                // your code here
+                currentNumber = autoTextView.getItemAtPosition(position).toString();
                 phoneTextView.setText(currentNumber);
             }
-        });
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+
+        });
         deleteButton .setOnClickListener(new View.OnClickListener() { //When the button is clicked the method will run.
             public void onClick(View v){
                 String message = "Must Select A Phone Number";
@@ -128,7 +134,7 @@ public class fragment_orders extends Fragment {
 
              //  autoTextView.setText("");
 
-                autoTextView.setText("");
+                autoTextView.setSelection(-1);
 
 
                 phoneTextView.setText("");
