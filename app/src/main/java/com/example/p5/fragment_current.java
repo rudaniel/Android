@@ -1,22 +1,27 @@
 package com.example.p5;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+
+import project4.Deluxe;
+import project4.Hawaiian;
+import project4.Pepperoni;
+import project4.Pizza;
+import project4.PizzaMaker;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -72,8 +77,16 @@ public class fragment_current extends Fragment {
 
     ListView pizzaList;
 
-    ArrayList<String> pizzas =  new ArrayList<String>();
+    ArrayList<Pizza> pizzas =  new ArrayList<Pizza>();
+    ArrayList<String> pizzasString =  new ArrayList<String>();
     ArrayAdapter<String> adapterPizzas;
+    String currentNumber = "-1";
+    Button placeOrderButton;
+    Button removePizzaButton;
+    TextView subTotalView;
+    TextView salesTaxView;
+    TextView orderTotalView;
+    private static final DecimalFormat df = new DecimalFormat("0.00");
 
     @SuppressLint("ResourceAsColor")
     @Override
@@ -83,30 +96,91 @@ public class fragment_current extends Fragment {
         View view= inflater.inflate(R.layout.fragment_current, container, false);
         phoneHolder = (TextView) getActivity().findViewById(R.id.editTextPhone2);
         phoneNumber= phoneHolder.getText().toString();
-
         pizzaList = (ListView) view.findViewById(R.id.pizzaList);
 
-        pizzas.add(phoneNumber); //Instead of adding phoneNumber we will add all of the pizzas to the list.
-        pizzas.add("9086342536");
-        pizzas.add("1010203040");
+
+        Pizza deluxePizza = new Deluxe();
+        Pizza hawaiianPizza = new Hawaiian();
+        Pizza pepperoniPizza = new Pepperoni();
 
 
+        pizzas.add(deluxePizza); //Instead of adding phoneNumber we will add all of the pizzas to the list.
+        pizzas.add(hawaiianPizza);
+        pizzas.add(pepperoniPizza);
 
-        adapterPizzas = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1 , pizzas);
+        String parse0 = pizzas.get(0).toString();
+        String parse1 = pizzas.get(1).toString();
+        String parse2 = pizzas.get(2).toString();
+
+        pizzasString.add(parse0);
+        pizzasString.add(parse1);
+        pizzasString.add(parse2);
+
+
+        adapterPizzas = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1 , pizzasString);
         pizzaList.setAdapter(adapterPizzas);
 
         pizzaList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-              //  view.getFocusables(position);
-              //  view.setSelected(true);
 
+                currentNumber = pizzaList.getItemAtPosition(position).toString();
+
+            }
+        });
+
+        placeOrderButton = (Button) view.findViewById(R.id.placeOrderButton);
+        removePizzaButton = (Button) view.findViewById(R.id.removePizzaButton);
+
+        removePizzaButton.setOnClickListener(new View.OnClickListener() { //When the button is clicked the method will run.
+            public void onClick(View v){
+                String message = "Must Select A Phone Number";
+                if (currentNumber == "-1"){
+                    Toast toast=Toast.makeText(getActivity(),message, Toast.LENGTH_LONG);
+                    toast.show();
+                }
+
+                String tempPizza = currentNumber; //this will be pizza
+               // double tempSubTotal = tempPizza.price(); Will be the price of that pizza.
+
+                String tempAmount = subTotalView.getText().toString(); //current Price
+                double tempAmountD = Double.valueOf(tempAmount);
+             // tempAmountD = tempAmountD - tempSubTotal;
+             // subTotalView.setText(tempAmountD); //Sets new amount
+
+
+                adapterPizzas.remove(currentNumber); //Instead of removing phone number we would remove pizza.
+                adapterPizzas.notifyDataSetChanged();
+                pizzaList.setAdapter(adapterPizzas);
+                pizzaList.setSelection(-1);
 
 
             }
         });
-        
-        getPizzas();
+
+
+        subTotalView = (TextView) view.findViewById(R.id.subTotalView);
+        salesTaxView = (TextView) view.findViewById(R.id.salesTaxView);
+        orderTotalView = (TextView) view.findViewById(R.id.orderTotalView);
+        double pizzaSubTotal = 0;
+        double taxAmount = 1.06625;
+       // ArrayList<Pizza> pizzas
+
+        for (int i = 0; i<pizzas.size(); i++){
+            double temp = pizzas.get(i).price();
+            pizzaSubTotal = temp + pizzaSubTotal;
+
+        }
+      // double pizzaSubTotal = deluxePizza.price();
+      // String amount = Double.toString(pizzaSubTotal);
+       Double tax = (pizzaSubTotal * taxAmount) - pizzaSubTotal;
+       Double orderTotal = (pizzaSubTotal * taxAmount);
+
+
+        subTotalView.setText(df.format(pizzaSubTotal));
+        salesTaxView.setText(df.format(tax));
+        orderTotalView.setText(df.format(orderTotal));
+        //  getPizzas();
         return view;
     }
 
