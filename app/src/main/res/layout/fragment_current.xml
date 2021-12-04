@@ -6,9 +6,48 @@
     tools:context=".fragment_current">
 
     <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/editTextTextPersonName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:ems="10"
+            android:gravity="center"
+            android:text="Pizza  Order"
+            android:inputType="none"
+            android:enabled="false"
+           />
+
+        <ListView
+            android:id="@+id/pizzaList"
+            android:layout_width="241dp"
+            android:layout_height="313dp"
+            android:background="@color/white"
+            android:choiceMode="singleChoice"
+           />
+
+        <Button
+            android:id="@+id/placeOrderButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Place Order" />
+
+        <Button
+            android:id="@+id/button6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Button" />/ android:listSelector="@color/maroon_700"
+            android:textColor="#FF00FF"/>
+    </LinearLayout>
+
     <TextView
         android:id="@+id/phoneTemp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </FrameLayout>
