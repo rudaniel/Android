@@ -1,5 +1,6 @@
 package com.example.p5;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -27,7 +28,7 @@ public class fragment_menu extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    Button button;
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -63,6 +64,16 @@ public class fragment_menu extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_menu, container, false);
+        View view= inflater.inflate(R.layout.fragment_menu, container, false);
+
+        button= (Button) view.findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() { //When the button is clicked the method will run.
+            public void onClick(View v){
+                Intent i = new Intent(getActivity(), CustomizeActivity.class);
+                i.putExtra("pizza","Deluxe");
+                startActivity(i);
+            }
+        });
+        return view;
     }
 }
