@@ -101,12 +101,14 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="35dp"
                 android:layout_marginBottom="10dp"
-                android:background="@color/white">
+                android:background="@color/white"
+                android:listSelector="#FFEB3B"
+                android:choiceMode="multipleChoice">
 
             </ListView>
 
             <Button
-                android:id="@+id/button5"
+                android:id="@+id/addToOrderButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"

@@ -24,4 +24,5 @@
     <string name="pizza">Pizza</string>
     <string name="customizing">Customizing</string>
     <string name="add_to_order">Add to Order</string>
+    <string name="order">Order #</string>
 </resources>
