@@ -29,7 +29,7 @@
         <ListView
             android:id="@+id/pizzaList"
             android:layout_width="325dp"
-            android:layout_height="300dp"
+            android:layout_height="250dp"
 
             android:background="@color/white"
             android:choiceMode="singleChoice" />
@@ -49,6 +49,18 @@
 
             />
 
+        <EditText
+            android:id="@+id/editTextTextPersonName2"
+            android:layout_width="112dp"
+            android:layout_height="23dp"
+            android:background="@color/white"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Sub Total"
+            android:gravity="center"
+            android:textColor="#050505"
+        />
+
         <TextView
             android:id="@+id/subTotalView"
             android:layout_width="137dp"
@@ -56,16 +68,36 @@
             android:background="@color/white"
             android:hint="SubTotal" />
 
+        <EditText
+            android:id="@+id/editTextTextPersonName4"
+            android:layout_width="111dp"
+            android:layout_height="20dp"
+            android:background="@color/white"
+            android:ems="10"
+            android:gravity="center"
+            android:text="Sales Tax" />
+
         <TextView
             android:id="@+id/salesTaxView"
-            android:layout_width="141dp"
+            android:layout_width="137dp"
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:hint="salesTax" />
 
+        <EditText
+            android:id="@+id/orderTotalLabel"
+            android:layout_width="112dp"
+            android:layout_height="19dp"
+            android:ems="10"
+            android:background="@color/white"
+            android:gravity="center"
+            android:inputType="textPersonName"
+            android:text="Order Total"
+            android:textColor="#050505" />
+
         <TextView
             android:id="@+id/orderTotalView"
-            android:layout_width="142dp"
+            android:layout_width="137dp"
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:hint="orderTotal" />

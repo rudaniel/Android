@@ -80,7 +80,7 @@ public class fragment_current extends Fragment {
     ArrayList<Pizza> pizzas =  new ArrayList<Pizza>();
     ArrayList<String> pizzasString =  new ArrayList<String>();
     ArrayAdapter<String> adapterPizzas;
-    String currentNumber = "-1";
+    String currentPizza = "-1";
     Button placeOrderButton;
     Button removePizzaButton;
     TextView subTotalView;
@@ -116,54 +116,56 @@ public class fragment_current extends Fragment {
         pizzasString.add(parse1);
         pizzasString.add(parse2);
 
-
-        adapterPizzas = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1 , pizzasString);
-        pizzaList.setAdapter(adapterPizzas);
-
-        pizzaList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                currentNumber = pizzaList.getItemAtPosition(position).toString();
-
-            }
-        });
-
-        placeOrderButton = (Button) view.findViewById(R.id.placeOrderButton);
-        removePizzaButton = (Button) view.findViewById(R.id.removePizzaButton);
-
-        removePizzaButton.setOnClickListener(new View.OnClickListener() { //When the button is clicked the method will run.
-            public void onClick(View v){
-                String message = "Must Select A Phone Number";
-                if (currentNumber == "-1"){
-                    Toast toast=Toast.makeText(getActivity(),message, Toast.LENGTH_LONG);
-                    toast.show();
-                }
-
-                String tempPizza = currentNumber; //this will be pizza
-               // double tempSubTotal = tempPizza.price(); Will be the price of that pizza.
-
-                String tempAmount = subTotalView.getText().toString(); //current Price
-                double tempAmountD = Double.valueOf(tempAmount);
-             // tempAmountD = tempAmountD - tempSubTotal;
-             // subTotalView.setText(tempAmountD); //Sets new amount
-
-
-                adapterPizzas.remove(currentNumber); //Instead of removing phone number we would remove pizza.
-                adapterPizzas.notifyDataSetChanged();
-                pizzaList.setAdapter(adapterPizzas);
-                pizzaList.setSelection(-1);
-
-
-            }
-        });
-
-
         subTotalView = (TextView) view.findViewById(R.id.subTotalView);
         salesTaxView = (TextView) view.findViewById(R.id.salesTaxView);
         orderTotalView = (TextView) view.findViewById(R.id.orderTotalView);
         double pizzaSubTotal = 0;
         double taxAmount = 1.06625;
+
+        adapterPizzas = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1 , pizzasString);
+        pizzaList.setAdapter(adapterPizzas);
+        pizzaList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                currentPizza = pizzaList.getItemAtPosition(position).toString();
+               // System.out.println(currentNumber);
+            }
+        });
+        placeOrderButton = (Button) view.findViewById(R.id.placeOrderButton);
+        removePizzaButton = (Button) view.findViewById(R.id.removePizzaButton);
+        removePizzaButton.setOnClickListener(new View.OnClickListener() { //When the button is clicked the method will run.
+            public void onClick(View v){
+                String message = "Must Select A Phone Number";
+                if (currentPizza == "-1"){
+                    Toast toast=Toast.makeText(getActivity(),message, Toast.LENGTH_LONG);
+                    toast.show();
+                }
+                double newSubTotal = 0;
+                for (int i = 0; i<pizzas.size(); i++){
+                    if(pizzas.get(i).toString().equals(currentPizza)){
+                        pizzas.remove(i);
+                        for (int j = 0; j<pizzas.size(); j++){
+                            double temp = pizzas.get(j).price();
+                            newSubTotal = temp + newSubTotal;
+                        }
+                        Double tax = (newSubTotal * taxAmount) - newSubTotal;
+                        Double orderTotal = (newSubTotal * taxAmount);
+
+
+                        subTotalView.setText(df.format(newSubTotal));
+                        salesTaxView.setText(df.format(tax));
+                        orderTotalView.setText(df.format(orderTotal));
+                    }
+                }
+                adapterPizzas.remove(currentPizza); //Instead of removing phone number we would remove pizza.
+                adapterPizzas.notifyDataSetChanged();
+                pizzaList.setAdapter(adapterPizzas);
+                pizzaList.setSelection(-1);
+            }
+        });
+
+
+
        // ArrayList<Pizza> pizzas
 
         for (int i = 0; i<pizzas.size(); i++){
