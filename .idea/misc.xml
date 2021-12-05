@@ -4,7 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/balit/AndroidStudioProjects/P5/app/src/main/res/layout-v23/fragment_orders.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/balit/AndroidStudioProjects/P5/app/src/main/res/layout/activity_customize.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/balit/AndroidStudioProjects/P5/app/src/main/res/layout/activity_customize.xml" value="0.33" />
         <entry key="..\:/Users/balit/AndroidStudioProjects/P5/app/src/main/res/layout/activity_cutomize.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/balit/AndroidStudioProjects/P5/app/src/main/res/layout/activity_main.xml" value="0.2803030303030303" />
         <entry key="..\:/Users/balit/AndroidStudioProjects/P5/app/src/main/res/layout/activity_ordering.xml" value="0.3491847826086957" />
@@ -16,7 +16,6 @@
         <entry key="..\:/Users/balit/AndroidStudioProjects/P5/app/src/main/res/layout/fragment_ordering.xml" value="0.3491847826086957" />
         <entry key="..\:/Users/balit/AndroidStudioProjects/P5/app/src/main/res/layout/fragment_orders.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/balit/AndroidStudioProjects/P5/app/src/main/res/layout/second.xml" value="0.2015625" />
-        <entry key="app/src/main/res/layout/fragment_current.xml" value="0.375" />
       </map>
     </option>
   </component>

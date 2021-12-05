@@ -22,6 +22,7 @@
             android:padding="@dimen/appbar_padding"
             android:text="@string/ordering_page"
             android:textAppearance="@style/TextAppearance.Widget.AppCompat.Toolbar.Title"
+            android:textSize="20sp"
             android:textStyle="bold|italic" />
 
         <LinearLayout

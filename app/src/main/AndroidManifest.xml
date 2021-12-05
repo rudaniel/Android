@@ -11,7 +11,8 @@
         android:theme="@style/Theme.P5">
         <activity
             android:name=".CustomizeActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.P5.NoActionBar" />
         <activity
             android:name=".OrderingActivity"
             android:exported="false"

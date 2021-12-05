@@ -21,6 +21,7 @@ public class CustomizeActivity extends AppCompatActivity {
     Spinner spinner;
     String pizza;
     ImageView image;
+    TextView title;
     private static final String deluxe="Deluxe";
     private static final String hawaiian="Hawaiian";
     private static final String pepperoni="Pepperoni";
@@ -33,6 +34,7 @@ public class CustomizeActivity extends AppCompatActivity {
         Intent i=getIntent();
         pizza= i.getExtras().getString("pizza");
         sizes=new ArrayAdapter<>(this, R.layout.spinner_item , Arrays.asList(Size.values()));
+        title=(TextView) findViewById(R.id.textView4);
         spinner= (Spinner) findViewById(R.id.spinner);
         image= (ImageView) findViewById(R.id.imageView5);
         imageSet();
@@ -44,12 +46,15 @@ public class CustomizeActivity extends AppCompatActivity {
         String uri="";
         if(pizza.equals(deluxe)){
             uri = "@drawable/deluxe";
+            title.setText(deluxe);
         }
         else if(pizza.equals(hawaiian)){
             uri = "@drawable/hawaiian";
+            title.setText(hawaiian);
         }
         else if(pizza.equals(pepperoni)){
             uri = "@drawable/pepperoni";
+            title.setText(pepperoni);
         }
         int imageResource = getResources().getIdentifier(uri, null, getPackageName());
         Drawable res = getResources().getDrawable(imageResource);

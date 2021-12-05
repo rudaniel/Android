@@ -23,6 +23,8 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import project4.StoreOrders;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link fragment_orders#newInstance} factory method to
@@ -82,6 +84,7 @@ public class fragment_orders extends Fragment {
     TextView phoneTextView;
     Button deleteButton;
     String currentNumber = "-1";
+
 
 
     @Override

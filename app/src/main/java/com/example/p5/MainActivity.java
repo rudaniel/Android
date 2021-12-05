@@ -16,9 +16,15 @@ import android.view.View;
 import com.example.p5.ui.main.SectionsPagerAdapter;
 import com.example.p5.databinding.ActivityMainBinding;
 
+import java.util.ArrayList;
+
+import project4.StoreOrders;
+
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
+    private StoreOrders orders = new StoreOrders();
+    private ArrayList<String> numberList = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,5 +48,8 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+    }
+    public StoreOrders getOrders(){
+        return orders;
     }
 }

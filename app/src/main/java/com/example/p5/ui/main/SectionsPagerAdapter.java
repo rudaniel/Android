@@ -13,6 +13,10 @@ import com.example.p5.fragment_current;
 import com.example.p5.fragment_login;
 import com.example.p5.fragment_orders;
 
+import java.util.ArrayList;
+
+import project4.StoreOrders;
+
 /**
  * A [FragmentPagerAdapter] that returns a fragment corresponding to
  * one of the sections/tabs/pages.

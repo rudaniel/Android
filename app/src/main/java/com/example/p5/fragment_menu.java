@@ -28,7 +28,9 @@ public class fragment_menu extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    Button button;
+    Button deluxe;
+    Button hawaiian;
+    Button pepperoni;
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -66,11 +68,29 @@ public class fragment_menu extends Fragment {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_menu, container, false);
 
-        button= (Button) view.findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() { //When the button is clicked the method will run.
+        deluxe= (Button) view.findViewById(R.id.button);
+        deluxe.setOnClickListener(new View.OnClickListener() { //When the button is clicked the method will run.
             public void onClick(View v){
                 Intent i = new Intent(getActivity(), CustomizeActivity.class);
                 i.putExtra("pizza","Deluxe");
+                startActivity(i);
+            }
+        });
+
+        hawaiian= (Button) view.findViewById(R.id.button2);
+        hawaiian.setOnClickListener(new View.OnClickListener() { //When the button is clicked the method will run.
+            public void onClick(View v){
+                Intent i = new Intent(getActivity(), CustomizeActivity.class);
+                i.putExtra("pizza","Hawaiian");
+                startActivity(i);
+            }
+        });
+
+        pepperoni= (Button) view.findViewById(R.id.button3);
+        pepperoni.setOnClickListener(new View.OnClickListener() { //When the button is clicked the method will run.
+            public void onClick(View v){
+                Intent i = new Intent(getActivity(), CustomizeActivity.class);
+                i.putExtra("pizza","Pepperoni");
                 startActivity(i);
             }
         });
