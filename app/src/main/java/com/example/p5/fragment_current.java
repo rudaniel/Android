@@ -78,9 +78,9 @@ public class fragment_current extends Fragment {
     ListView pizzaList;
 
     ArrayList<Pizza> pizzas =  new ArrayList<Pizza>();
-    ArrayList<String> pizzasString =  new ArrayList<String>();
-    ArrayAdapter<String> adapterPizzas;
-    String currentPizza = "-1";
+   // ArrayList<String> pizzasString =  new ArrayList<String>();
+    ArrayAdapter<Pizza> adapterPizzas;
+    Pizza currentPizza=null;
     Button placeOrderButton;
     Button removePizzaButton;
     TextView subTotalView;
@@ -108,13 +108,13 @@ public class fragment_current extends Fragment {
         pizzas.add(hawaiianPizza);
         pizzas.add(pepperoniPizza);
 
-        String parse0 = pizzas.get(0).toString();
-        String parse1 = pizzas.get(1).toString();
-        String parse2 = pizzas.get(2).toString();
-
-        pizzasString.add(parse0);
-        pizzasString.add(parse1);
-        pizzasString.add(parse2);
+//        String parse0 = pizzas.get(0).toString();
+//        String parse1 = pizzas.get(1).toString();
+//        String parse2 = pizzas.get(2).toString();
+//
+//        pizzasString.add(parse0);
+//        pizzasString.add(parse1);
+//        pizzasString.add(parse2);
 
         subTotalView = (TextView) view.findViewById(R.id.subTotalView);
         salesTaxView = (TextView) view.findViewById(R.id.salesTaxView);
@@ -122,12 +122,12 @@ public class fragment_current extends Fragment {
         double pizzaSubTotal = 0;
         double taxAmount = 1.06625;
 
-        adapterPizzas = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1 , pizzasString);
+        adapterPizzas = new ArrayAdapter<>(getActivity(), R.layout.spinner_item , pizzas);
         pizzaList.setAdapter(adapterPizzas);
         pizzaList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                currentPizza = pizzaList.getItemAtPosition(position).toString();
+                currentPizza = (Pizza) pizzaList.getItemAtPosition(position);
                // System.out.println(currentNumber);
             }
         });
@@ -136,13 +136,13 @@ public class fragment_current extends Fragment {
         removePizzaButton.setOnClickListener(new View.OnClickListener() { //When the button is clicked the method will run.
             public void onClick(View v){
                 String message = "Must Select A Phone Number";
-                if (currentPizza == "-1"){
+                if (currentPizza == null){
                     Toast toast=Toast.makeText(getActivity(),message, Toast.LENGTH_LONG);
                     toast.show();
                 }
                 double newSubTotal = 0;
                 for (int i = 0; i<pizzas.size(); i++){
-                    if(pizzas.get(i).toString().equals(currentPizza)){
+                    if(pizzas.get(i).equals(currentPizza)){
                         pizzas.remove(i);
                         for (int j = 0; j<pizzas.size(); j++){
                             double temp = pizzas.get(j).price();

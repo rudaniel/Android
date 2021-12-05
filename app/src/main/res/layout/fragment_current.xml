@@ -30,7 +30,7 @@
             android:id="@+id/pizzaList"
             android:layout_width="325dp"
             android:layout_height="250dp"
-
+            android:listSelector="#FFEB3B"
             android:background="@color/white"
             android:choiceMode="singleChoice" />
 
