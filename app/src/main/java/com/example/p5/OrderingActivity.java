@@ -47,4 +47,12 @@ public class OrderingActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void setNumber(String number){
+        editTextPhone2.setText(number);
+    }
+
+    public String getNumber(){
+        return editTextPhone2.getText().toString();
+    }
 }

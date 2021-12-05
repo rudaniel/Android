@@ -48,13 +48,13 @@ public class CustomizeActivity extends AppCompatActivity {
     ArrayList<Topping> tempList =  new ArrayList<Topping>();
     String[] message = new String[11];
     Pizza finalPizza;
-
+    Intent i=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTheme(android.R.style.Theme);
         setContentView(R.layout.activity_customize);
-        Intent i=getIntent();
+        i=getIntent();
         pizza= i.getExtras().getString("pizza");
         sizes=new ArrayAdapter<>(this, R.layout.spinner_item , Arrays.asList(Size.values()));
         title=(TextView) findViewById(R.id.textView4);

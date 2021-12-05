@@ -55,7 +55,7 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.core.widget.NestedScrollView
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
 
@@ -65,8 +65,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            tools:context=".CustomizeActivity">
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -102,8 +101,9 @@
                 android:layout_marginRight="35dp"
                 android:layout_marginBottom="10dp"
                 android:background="@color/white"
-                android:listSelector="#FFEB3B"
-                android:choiceMode="multipleChoice">
+                android:choiceMode="multipleChoice"
+                android:isScrollContainer="true"
+                android:listSelector="#FFEB3B">
 
             </ListView>
 
@@ -116,7 +116,7 @@
 
         </LinearLayout>
 
-    </androidx.core.widget.NestedScrollView>
+    </FrameLayout>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
