@@ -23,6 +23,12 @@ import java.util.ArrayList;
 import project4.Order;
 import project4.StoreOrders;
 
+
+/**
+ * Main start up page opens app.
+ * @author Manav Bali
+ * @author Daniel Lopez
+ */
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
@@ -30,6 +36,9 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<String> numberList = new ArrayList<String>();
     Order order;
 
+    /**
+     * Sets the Theme/Environment.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +62,9 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Gets an orders and adds it to store orders.
+     */
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -67,26 +79,44 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Gets orders.
+     */
     public Order getOrder(){
         return order;
     }
 
+    /**
+     * Sets orders.
+     */
     public void setOrder(Order order){
         this.order=order;
     }
 
+    /**
+     * Gets Store orders.
+     */
     public StoreOrders getOrders(){
         return orders;
     }
 
+    /**
+     * Set Store orders.
+     */
     public void setOrders(StoreOrders orders){
         this.orders=orders;
     }
 
+    /**
+     * Get list of numbers.
+     */
     public ArrayList<String> getNumberList(){
         return numberList;
     }
 
+    /**
+     * Set list of numbers.
+     */
     public void setNumberList(ArrayList<String> numberList){
         this.numberList=numberList;
     }
