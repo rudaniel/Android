@@ -17,6 +17,8 @@ import com.example.p5.databinding.FragmentMainBinding;
 
 /**
  * A placeholder fragment containing a simple view.
+ * @author Manav Bali
+ * @author Daniel Lopez
  */
 public class PlaceholderFragment extends Fragment {
 
@@ -33,6 +35,9 @@ public class PlaceholderFragment extends Fragment {
         return fragment;
     }
 
+    /**
+     * Connects the instance to the model.
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +49,9 @@ public class PlaceholderFragment extends Fragment {
         pageViewModel.setIndex(index);
     }
 
+    /**
+     * Connects the root odf view.
+     */
     @Override
     public View onCreateView(
             @NonNull LayoutInflater inflater, ViewGroup container,
@@ -62,6 +70,9 @@ public class PlaceholderFragment extends Fragment {
         return root;
     }
 
+    /**
+     * Deletes the current view.
+     */
     @Override
     public void onDestroyView() {
         super.onDestroyView();
