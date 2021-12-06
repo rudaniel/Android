@@ -19,42 +19,32 @@ import android.widget.Toast;
 import project4.Order;
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link fragment_login#newInstance} factory method to
- * create an instance of this fragment.
+ * Log in page before an order can be made.
+ * @author Manav Bali
+ * @author Daniel Lopez
  */
 public class fragment_login extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
     EditText editTextPhone;
     String phoneNumberString;
     Button button4;
     Order order=null;
-
     private static final int request=0;
     private static final int result=-1;
 
+    /**
+     * Required empty public constructor
+     */
     public fragment_login() {
-        // Required empty public constructor
     }
 
     /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment fragment_login.
+     * Creates an new instance.
      */
-    // TODO: Rename and change types and number of parameters
     public static fragment_login newInstance(String param1, String param2) {
         fragment_login fragment = new fragment_login();
         Bundle args = new Bundle();
@@ -64,6 +54,9 @@ public class fragment_login extends Fragment {
         return fragment;
     }
 
+    /**
+     * Creates the page.
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,6 +66,10 @@ public class fragment_login extends Fragment {
 
         }
     }
+
+    /**
+     * Sends an error message if phone number is not valid.
+     */
     public boolean alert(String phoneNumberString) {
         if(!phoneCheck(phoneNumberString)) {
             int offset=0;
@@ -84,6 +81,9 @@ public class fragment_login extends Fragment {
         return true;
     }
 
+    /**
+     * Checks the phone number being entered.
+     */
     public boolean phoneCheck(String phoneNumberString) {
         boolean result = phoneNumberString.matches("[0-9]+");
 
@@ -94,6 +94,10 @@ public class fragment_login extends Fragment {
             return false;
         }
     }
+
+    /**
+     * Manages the log in and letting the user in.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.fragment_login, container, false);
@@ -115,6 +119,10 @@ public class fragment_login extends Fragment {
         });
         return view;
     }
+
+    /**
+     * Gets an orders that may have been made..
+     */
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
