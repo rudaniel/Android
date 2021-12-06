@@ -55,6 +55,18 @@
         android:textSize="24sp" />
 
     <TextView
+        android:id="@+id/textView10"
+
+
+        android:text="@string/order_total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/clear"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold|italic"/>
+
+    <TextView
         android:id="@+id/orderTotal"
         android:layout_width="67dp"
         android:layout_height="wrap_content"
