@@ -1,6 +1,8 @@
 package com.example.p5;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 
@@ -105,8 +107,38 @@ public class fragment_current extends Fragment {
                 currentPizza=null;
             }
         });
+
+        placeOrderButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v){
+                placeOrder();
+            }
+        });
         calculateTotals();
         return view;
+    }
+
+    private void placeOrder() {
+        try{
+            pizzas = order.getPizzas();
+            if(pizzas.isEmpty()) {
+                errorOrder();
+            }
+            else{
+                Intent send= new Intent();
+                send.putExtra("Order", order);
+                getActivity().setResult(Activity.RESULT_OK, send);
+                getActivity().finish();
+            }
+        }
+        catch(Exception e) {
+            errorOrder();
+        }
+    }
+
+    private void errorOrder() {
+        String message = "Order is Incomplete, Finish Order or Press Cancel Order.";
+        Toast toast=Toast.makeText(getActivity(),message, Toast.LENGTH_LONG);
+        toast.show();
     }
 
     private void fillObjects(View view) {

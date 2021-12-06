@@ -67,17 +67,7 @@ public class fragment_orders extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_orders, container, false);
-        activity=(MainActivity) getActivity();
-        orders= activity.getOrders();
-        phoneNumbers=activity.getNumberList();
-        autoCompleteTextView = (Spinner) view.findViewById(R.id.autoCompleteTextView);
-        adapterItems = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item , phoneNumbers);
-        autoCompleteTextView.setAdapter(adapterItems);
-        phoneTextView = (TextView) view.findViewById(R.id.phoneTextView);
-        orderTotal = (TextView) view.findViewById(R.id.orderTotal);
-        deleteButton = (Button) view.findViewById(R.id.deleteButton);
-        phoneTextView.setMovementMethod(new ScrollingMovementMethod());
-        orderTotal.setText(String.valueOf(zero));
+        linkValues(view);
         autoCompleteTextView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
@@ -103,6 +93,24 @@ public class fragment_orders extends Fragment {
             }
         });
         return view;
+    }
+
+    /**
+     * Links GUI elements to java file
+     */
+    private void linkValues(View view) {
+
+        activity=(MainActivity) getActivity();
+        orders= activity.getOrders();
+        phoneNumbers=activity.getNumberList();
+        autoCompleteTextView = (Spinner) view.findViewById(R.id.autoCompleteTextView);
+        adapterItems = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item , phoneNumbers);
+        autoCompleteTextView.setAdapter(adapterItems);
+        phoneTextView = (TextView) view.findViewById(R.id.phoneTextView);
+        orderTotal = (TextView) view.findViewById(R.id.orderTotal);
+        deleteButton = (Button) view.findViewById(R.id.deleteButton);
+        phoneTextView.setMovementMethod(new ScrollingMovementMethod());
+        orderTotal.setText(String.valueOf(zero));
     }
 
     /**
