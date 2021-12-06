@@ -15,12 +15,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
 import project4.Deluxe;
 import project4.Hawaiian;
+import project4.Order;
 import project4.Pepperoni;
 import project4.Pizza;
 import project4.Size;
@@ -49,6 +51,8 @@ public class CustomizeActivity extends AppCompatActivity {
     String[] message = new String[11];
     Pizza finalPizza;
     Intent i=null;
+    Order order=null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +60,7 @@ public class CustomizeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_customize);
         i=getIntent();
         pizza= i.getExtras().getString("pizza");
+        order=(Order) i.getSerializableExtra("Order");
         sizes=new ArrayAdapter<>(this, R.layout.spinner_item , Arrays.asList(Size.values()));
         title=(TextView) findViewById(R.id.textView4);
         spinner= (Spinner) findViewById(R.id.spinner);
@@ -77,34 +82,13 @@ public class CustomizeActivity extends AppCompatActivity {
         addToOrderButton = (Button) findViewById(R.id.addToOrderButton);
         addToOrderButton.setOnClickListener(new View.OnClickListener() { //When the button is clicked the method will run.
             public void onClick(View v){
-
                 tempList.removeAll(Collections.singleton(null));
                 finalPizza = makePizza(tempList);
-                System.out.println(finalPizza.toString());
-
-/*
-                Arrays.fill(message, null);
-                for(int i = 0; i<tempList.size(); i++){
-                    if(tempList.get(i).name().equals(null)){
-                    }
-                    else{
-                        message[i] = tempList.get(i).name();
-                    }
-                }
-                for(int i =0; i<message.length; i++){
-                    if(message[i] == null){
-
-                    }
-                    else{
-                        System.out.println(message[i]);
-                    }
-
-                }
-                */
-
-                //    Toast toast=Toast.makeText(getActivity(),message, Toast.LENGTH_LONG);
-                //    toast.show();
-
+                order.addPizza(finalPizza);
+                Intent send= new Intent();
+                send.putExtra("Order", order);
+                setResult(RESULT_OK, send);
+                finish();
             }
         });
 

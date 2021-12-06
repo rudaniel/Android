@@ -4,6 +4,7 @@ import java.io.File;
 
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 //import javafx.stage.FileChooser;
@@ -16,7 +17,7 @@ import java.util.ArrayList;
  * @author Manav Bali
  * @author Daniel Lopez
  */
-public class StoreOrders {
+public class StoreOrders implements Serializable {
 	
 	private ArrayList<Order> orders= new ArrayList<Order>();
 	/**
@@ -73,6 +74,11 @@ public class StoreOrders {
 	 */
 	public boolean removeOrder(int index) {
 		orders.remove(index);
+		return true;
+	}
+
+	public boolean removeOrder(String number) {
+		orders.remove(orders.indexOf(new Order(number)));
 		return true;
 	}
 	

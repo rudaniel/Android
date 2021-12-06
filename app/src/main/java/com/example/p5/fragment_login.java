@@ -3,6 +3,7 @@ package com.example.p5;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.Gravity;
@@ -14,6 +15,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import project4.Order;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,6 +37,10 @@ public class fragment_login extends Fragment {
     EditText editTextPhone;
     String phoneNumberString;
     Button button4;
+    Order order=null;
+
+    private static final int request=0;
+    private static final int result=-1;
 
     public fragment_login() {
         // Required empty public constructor
@@ -73,7 +80,6 @@ public class fragment_login extends Fragment {
             Toast toast=Toast.makeText(getActivity(),message, Toast.LENGTH_LONG);
             View t= toast.getView();
             toast.setGravity(Gravity.CENTER,offset,offset);
-           // t.setBackgroundColor(getResources().getColor(R.color.maroon_500));
             TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
             toastMessage.setTextColor(getResources().getColor(R.color.maroon_200));
             toastMessage.setBackgroundColor(getResources().getColor(R.color.clear));
@@ -93,30 +99,41 @@ public class fragment_login extends Fragment {
             return false;
         }
     }
-//daniel
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.fragment_login, container, false);
         editTextPhone = (EditText) view.findViewById(R.id.editTextPhone);
         button4= (Button) view.findViewById(R.id.button4);
-        button4.setOnClickListener(new View.OnClickListener() { //When the button is clicked the method will run.
+        button4.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
-
                 phoneNumberString = editTextPhone.getText().toString();
-
                 if(alert(phoneNumberString)) {
+                    int request=0;
                     String empty="";
                     Intent i = new Intent(getActivity(), OrderingActivity.class);
                     i.putExtra("number",phoneNumberString);
-                    startActivity(i);
+                    startActivityForResult(i,request);
                     phoneNumberString=empty;
                     editTextPhone.setText(empty);
                 }
-
             }
         });
         return view;
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==request){
+            if(resultCode==result){
+                try {
+                    data.getSerializableExtra("Order");
+                    order=(Order) data.getSerializableExtra("Order");
+                    System.out.println("FRAGMENT: "+order);
+                }
+                catch(Exception e){
+                    System.out.println("FRAGMENT: " + "empty");
+                }
+            }
+        }
     }
 }

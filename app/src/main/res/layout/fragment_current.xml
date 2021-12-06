@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment_current">
+    tools:context=".fragment_current"
+    android:id="@+id/frag">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -16,7 +17,7 @@
         <ListView
             android:id="@+id/pizzaList"
             android:layout_width="match_parent"
-            android:layout_height="334dp"
+            android:layout_height="216dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:background="@color/white"
@@ -112,6 +113,11 @@
                 android:baselineAligned="false"
                 android:text="@string/place_order" />
 
+            <Space
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0" />
+
             <Button
                 android:id="@+id/removePizzaButton"
                 android:layout_width="wrap_content"
@@ -119,13 +125,17 @@
                 android:text="@string/remove_pizza"
 
                 />
+
         </LinearLayout>
 
-    </LinearLayout>
+        <Button
+            android:id="@+id/button5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:text="@string/cancel_order" />
 
-    <TextView
-        android:id="@+id/phoneTemp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    </LinearLayout>
 
 </FrameLayout>

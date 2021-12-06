@@ -1,5 +1,6 @@
 package project4;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
 /**
@@ -8,7 +9,7 @@ import java.util.Arrays;
  * @author Manav Bali
  * @author Daniel Lopez
  */
-public class Hawaiian extends Pizza {
+public class Hawaiian extends Pizza implements Serializable {
 	
 	private double priceHawaiian;
 	

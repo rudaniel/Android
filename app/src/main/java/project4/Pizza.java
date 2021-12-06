@@ -1,4 +1,5 @@
 package project4;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 import java.text.DecimalFormat;
@@ -8,7 +9,7 @@ import java.text.DecimalFormat;
  * @author Manav Bali
  * @author Daniel Lopez
  */
-public abstract class Pizza {
+public abstract class Pizza implements Serializable {
 
 	protected ArrayList <Topping> toppings = new ArrayList<Topping>();
 	protected Size size;

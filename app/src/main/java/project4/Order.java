@@ -1,5 +1,6 @@
 package project4;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -8,7 +9,7 @@ import java.util.ArrayList;
  * @author Manav Bali
  * @author Daniel Lopez
  */
-public class Order {
+public class Order implements Serializable {
 	private String phone;
 	private ArrayList<Pizza> pizzas= new ArrayList<Pizza>();
 	
@@ -16,7 +17,7 @@ public class Order {
 	 * Setter method to set phone number.
 	 * @param phone phone number of user
 	 */
-	public Order(String phone) {
+	public Order(String phone)  {
 		this.phone=phone;
 	}
 	
