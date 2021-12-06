@@ -27,39 +27,31 @@ import project4.Pepperoni;
 import project4.Pizza;
 import project4.PizzaMaker;
 
-
+/**
+ * Current orders based on current phone number.
+ * @author Manav Bali
+ * @author Daniel Lopez
+ */
 public class fragment_current extends Fragment {
     TextView phoneHolder;
     TextView phoneTemp;
     String phoneNumber;
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-   // private static final String ARG_PARAM1 = "param1";
-   // private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    //private String mParam1;
-   //private String mParam2;
 
+    /**
+     * Default constructor.
+     */
     public fragment_current() { }
 
 
-//    public static fragment_current newInstance(String param1, String param2) {
-//        fragment_current fragment = new fragment_current();
-//        Bundle args = new Bundle();
-//        args.putString(ARG_PARAM1, param1);
-//        args.putString(ARG_PARAM2, param2);
-//        fragment.setArguments(args);
-//        return fragment;
-//    }
 
+    /**
+     * Gets on saved instances.
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        if (getArguments() != null) {
-//            mParam1 = getArguments().getString(ARG_PARAM1);
-//            mParam2 = getArguments().getString(ARG_PARAM2);
-//        }
+
     }
 
     ListView pizzaList;
@@ -77,6 +69,10 @@ public class fragment_current extends Fragment {
     Order order=null;
     private static final DecimalFormat df = new DecimalFormat("0.00");
 
+    /**
+     * Checks to make sure an order was first made.
+     * Handles functionality of the overall page.
+     */
     @SuppressLint("ResourceAsColor")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
@@ -117,6 +113,9 @@ public class fragment_current extends Fragment {
         return view;
     }
 
+    /**
+     * Gets the pizza and adds it to a store order.
+     */
     private void placeOrder() {
         try{
             pizzas = order.getPizzas();
@@ -135,12 +134,18 @@ public class fragment_current extends Fragment {
         }
     }
 
+    /**
+     * Error message.
+     */
     private void errorOrder() {
         String message = "Order is Incomplete, Finish Order or Press Cancel Order.";
         Toast toast=Toast.makeText(getActivity(),message, Toast.LENGTH_LONG);
         toast.show();
     }
 
+    /**
+     * Creates the objects and tags them to the xml.
+     */
     private void fillObjects(View view) {
         phoneHolder = (TextView) getActivity().findViewById(R.id.editTextPhone2);
         phoneNumber= phoneHolder.getText().toString();
@@ -152,6 +157,9 @@ public class fragment_current extends Fragment {
         removePizzaButton = (Button) view.findViewById(R.id.removePizzaButton);
     }
 
+    /**
+     * Sets the price based on the pizzas.
+     */
     private void calculateTotals() {
         pizzaSubTotal=0;
         for (int i = 0; i<pizzas.size(); i++){
@@ -165,6 +173,9 @@ public class fragment_current extends Fragment {
         orderTotalView.setText(df.format(orderTotal));
     }
 
+    /**
+     * Removes the pizza from the order and updates the pricing.
+     */
     private void removePizza() {
         int offset=0;
         if (currentPizza == null){
@@ -195,6 +206,10 @@ public class fragment_current extends Fragment {
             activity.setOrder(order);
         }
     }
+
+    /**
+     * Displays the errors messages.
+     */
 
     private void error() {
         int offset=0;
