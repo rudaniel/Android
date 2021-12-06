@@ -112,7 +112,7 @@
             <TextView
                 android:id="@+id/textView9"
 
-                android:text="@string/order_total"
+                android:text="@string/total"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/clear"
