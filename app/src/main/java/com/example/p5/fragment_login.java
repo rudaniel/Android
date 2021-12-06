@@ -78,11 +78,6 @@ public class fragment_login extends Fragment {
             int offset=0;
             String message="Enter Valid Phone number";
             Toast toast=Toast.makeText(getActivity(),message, Toast.LENGTH_LONG);
-            View t= toast.getView();
-            toast.setGravity(Gravity.CENTER,offset,offset);
-            TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
-            toastMessage.setTextColor(getResources().getColor(R.color.maroon_200));
-            toastMessage.setBackgroundColor(getResources().getColor(R.color.clear));
             toast.show();
             return false;
         }

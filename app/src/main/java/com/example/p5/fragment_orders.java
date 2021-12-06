@@ -100,11 +100,6 @@ public class fragment_orders extends Fragment {
                 if (currentNumber == null){
                     int offset=0;
                     Toast toast=Toast.makeText(getActivity(),message, Toast.LENGTH_LONG);
-                    View t= toast.getView();
-                    toast.setGravity(Gravity.CENTER,offset,offset);
-                    TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
-                    toastMessage.setTextColor(getResources().getColor(R.color.maroon_200));
-                    toastMessage.setBackgroundColor(getResources().getColor(R.color.clear));
                     toast.show();
                 }
                 else {

@@ -138,11 +138,6 @@ public class fragment_current extends Fragment {
         if (currentPizza == null){
             String message = "Must Select A Pizza";
             Toast toast=Toast.makeText(getActivity(),message, Toast.LENGTH_LONG);
-            View t= toast.getView();
-            toast.setGravity(Gravity.CENTER,offset,offset);
-            TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
-            toastMessage.setTextColor(getResources().getColor(R.color.maroon_200));
-            toastMessage.setBackgroundColor(getResources().getColor(R.color.clear));
             toast.show();
         }
         else {
@@ -173,11 +168,6 @@ public class fragment_current extends Fragment {
         int offset=0;
         String message="Order is Currently Empty, Add Pizzas!";
         Toast toast=Toast.makeText(getActivity(),message, Toast.LENGTH_LONG);
-        View t= toast.getView();
-        toast.setGravity(Gravity.CENTER,offset,offset);
-        TextView toastMessage = (TextView) toast.getView().findViewById(android.R.id.message);
-        toastMessage.setTextColor(getResources().getColor(R.color.maroon_200));
-        toastMessage.setBackgroundColor(getResources().getColor(R.color.clear));
         toast.show();
     }
 
