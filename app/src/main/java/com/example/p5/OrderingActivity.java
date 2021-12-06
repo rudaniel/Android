@@ -23,13 +23,20 @@ import com.example.p5.databinding.ActivityOrderingBinding;
 
 import project4.Order;
 
+/**
+ * Setting up the environment for orders.
+ * @author Manav Bali
+ * @author Daniel Lopez
+ */
 public class OrderingActivity extends AppCompatActivity {
 
     private ActivityOrderingBinding binding;
     TextView editTextPhone2;
     Order order;
 
-
+    /**
+     * Setting the theme of the page and getting intent.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,6 +84,10 @@ public class OrderingActivity extends AppCompatActivity {
             }
         });
     }
+
+    /**
+     * Gets any orders that may have been made.
+     */
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -89,17 +100,31 @@ public class OrderingActivity extends AppCompatActivity {
             System.out.println("ACTIVITY: " + "empty");
         }
     }
+
+    /**
+     * Set phone number.
+     */
     public void setNumber(String number){
         editTextPhone2.setText(number);
     }
 
+    /**
+     * Get phone number.
+     */
     public String getNumber(){
         return editTextPhone2.getText().toString();
     }
 
+    /**
+     * Get order.
+     */
     public Order getOrder(){
         return order;
     }
+
+    /**
+     * Set order.
+     */
     public void setOrder(Order order){
         this.order=order;
     }
