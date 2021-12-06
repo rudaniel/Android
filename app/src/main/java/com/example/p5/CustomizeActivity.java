@@ -52,6 +52,7 @@ public class CustomizeActivity extends AppCompatActivity {
     Pizza finalPizza;
     Intent i=null;
     Order order=null;
+    TextView livePrice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +66,7 @@ public class CustomizeActivity extends AppCompatActivity {
         title=(TextView) findViewById(R.id.textView4);
         spinner= (Spinner) findViewById(R.id.spinner);
         image= (ImageView) findViewById(R.id.imageView5);
+        livePrice = (TextView) findViewById(R.id.livePrice);
         imageSet();
         spinner.setAdapter(sizes);
 
@@ -92,7 +94,6 @@ public class CustomizeActivity extends AppCompatActivity {
             }
         });
 
-
         toppingsEditor.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -103,9 +104,28 @@ public class CustomizeActivity extends AppCompatActivity {
                 else{
                     tempList.add(temp);
                 }
+                Pizza temp = makePizza(tempList);
+                livePrice.setText(String.valueOf(temp.price()));
 
             }
         });
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Pizza temp = makePizza(tempList);
+                livePrice.setText(String.valueOf(temp.price()));
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                Pizza temp = makePizza(tempList);
+                livePrice.setText(String.valueOf(temp.price()));
+            }
+        });
+
+
+
     }
 
     public void imageSet() {

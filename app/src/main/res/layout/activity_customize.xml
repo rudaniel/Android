@@ -107,12 +107,19 @@
 
             </ListView>
 
+            <TextView
+                android:id="@+id/livePrice"
+                android:layout_width="202dp"
+                android:layout_height="wrap_content"
+                android:background="@color/white" />
+
             <Button
                 android:id="@+id/addToOrderButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:text="@string/add_to_order" />
+
 
         </LinearLayout>
 
