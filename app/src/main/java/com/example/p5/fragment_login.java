@@ -131,10 +131,10 @@ public class fragment_login extends Fragment {
                 try {
                     data.getSerializableExtra("Order");
                     order=(Order) data.getSerializableExtra("Order");
-                    System.out.println("FRAGMENT: "+order);
+
                 }
                 catch(Exception e){
-                    System.out.println("FRAGMENT: " + "empty");
+
                 }
             }
         }

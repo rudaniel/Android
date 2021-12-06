@@ -1,7 +1,9 @@
 package com.example.p5.ui.main;
 
 import android.content.Context;
+import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
@@ -26,9 +28,11 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     @StringRes
     private static final int[] TAB_TITLES = new int[]{R.string.tab_text_1,R.string.tab_text_2};
     private final Context mContext;
+    private ArrayList<String> fragments;
 
     public SectionsPagerAdapter(Context context, FragmentManager fm) {
         super(fm);
+        fragments=new ArrayList<String>();
         mContext = context;
     }
 
@@ -59,5 +63,25 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         // Show 2 total pages.
         int num=2;
         return num;
+    }
+
+    public String getFragment(int tab){
+        String tabName=fragments.get(tab);
+        if(tabName!=null){
+            return tabName;
+        }
+        return null;
+    }
+
+    @NonNull
+    @Override
+    public Object instantiateItem(@NonNull ViewGroup container, int position) {
+        Object o= super.instantiateItem(container, position);
+        if(o instanceof Fragment){
+            Fragment temp=(Fragment) o;
+            String name=temp.getTag();
+            fragments.add(position,name);
+        }
+        return o;
     }
 }

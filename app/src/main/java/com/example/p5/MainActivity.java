@@ -8,6 +8,8 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -33,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
     private StoreOrders orders = new StoreOrders();
-    private ArrayList<String> numberList = new ArrayList<String>();
     Order order;
 
     /**
@@ -45,19 +46,30 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setTheme(android.R.style.Theme);
         setContentView(binding.getRoot());
-
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
         ViewPager viewPager = binding.viewPager;
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = binding.tabs;
         tabs.setupWithViewPager(viewPager);
-        FloatingActionButton fab = binding.fab;
-
-        fab.setOnClickListener(new View.OnClickListener() {
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                Fragment frg = null;
+                frg = getSupportFragmentManager().findFragmentByTag(sectionsPagerAdapter.getFragment(position));
+                final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                ft.detach(frg);
+                ft.attach(frg);
+                ft.commit();
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
             }
         });
     }
@@ -72,10 +84,9 @@ public class MainActivity extends AppCompatActivity {
             data.getSerializableExtra("Order");
             order = (Order) data.getSerializableExtra("Order");
             orders.addOrder(order);
-            System.out.println("ADDED: " + order);
         }
         catch(Exception e){
-            System.out.println("ORDER NOT ADDED: " + "empty");
+
         }
     }
 
@@ -106,19 +117,4 @@ public class MainActivity extends AppCompatActivity {
     public void setOrders(StoreOrders orders){
         this.orders=orders;
     }
-
-    /**
-     * Get list of numbers.
-     */
-    public ArrayList<String> getNumberList(){
-        return numberList;
-    }
-
-    /**
-     * Set list of numbers.
-     */
-    public void setNumberList(ArrayList<String> numberList){
-        this.numberList=numberList;
-    }
-
 }

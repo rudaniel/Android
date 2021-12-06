@@ -77,11 +77,6 @@ public class StoreOrders implements Serializable {
 		return true;
 	}
 
-	public boolean removeOrder(String number) {
-		orders.remove(orders.indexOf(new Order(number)));
-		return true;
-	}
-	
 	/**
 	 * Removes order from the orders list.
 	 * @param phone number from user.
@@ -100,32 +95,7 @@ public class StoreOrders implements Serializable {
 		}
 		return false;
 	}
-	
-	/**
-	 * Exports entire orders list into a text file.
-	 * @return true if file if made.
-	 */
-//	public boolean export(){
-//		try {
-//		FileChooser chooser = new FileChooser();
-//		chooser.setTitle("Open Target File for the Export");
-//		chooser.getExtensionFilters().addAll(new ExtensionFilter("Text Files", "*.txt"),
-//				new ExtensionFilter("All Files", "*.*"));
-//		Stage stage = new Stage();
-//		File targetFile = chooser.showSaveDialog(stage);
-//		FileWriter fw = new FileWriter(targetFile, true);
-//		PrintWriter pw = new PrintWriter(fw);
-//		String order="Order: ";
-//		for(int i = 0; i < orders.size(); i++) {
-//			pw.println(order+orders.get(i));
-//		}
-//		pw.close();
-//		return true;
-//		}
-//		catch(Exception e) {
-//		return false;
-//		}
-//	}
+
 	
 	/**
 	 * Returns instance of list.
@@ -133,6 +103,14 @@ public class StoreOrders implements Serializable {
 	 */
 	public ArrayList<Order> getOrders() {
 		return orders;
+	}
+
+	/**
+	 * Returns instance of list.
+	 * @param orders list.
+	 */
+	public void setOrders(ArrayList<Order> orders){
+		this.orders=orders;
 	}
 	
 }

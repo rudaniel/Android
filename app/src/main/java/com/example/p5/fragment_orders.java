@@ -52,12 +52,14 @@ public class fragment_orders extends Fragment {
 
     ArrayList <String> phoneNumbers =  new ArrayList<String>();
     StoreOrders orders;
+    ArrayList<Order> orderList=new ArrayList<Order>();
     Spinner autoCompleteTextView;
     ArrayAdapter<String> adapterItems;
     TextView phoneTextView;
     TextView orderTotal;
     Button deleteButton;
-    String currentNumber = null;
+    int none=-1;
+    int pos = -1;
     MainActivity activity=null;
     final double zero =0;
 
@@ -71,17 +73,16 @@ public class fragment_orders extends Fragment {
         autoCompleteTextView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                currentNumber = autoCompleteTextView.getItemAtPosition(position).toString();
-                phoneTextView.setText(orders.getOrder(currentNumber).toString());
-                Order temp;
-                temp = orders.getOrder(currentNumber);
+                pos=position;
                 ArrayList<Pizza> pizzaTemp;
-                pizzaTemp = temp.getPizzas();
+                pizzaTemp = orderList.get(position).getPizzas();
+                phoneTextView.setText(pizzaTemp.toString());
                 double total = 0;
                 for(int i = 0; i<pizzaTemp.size(); i++){
                     total += pizzaTemp.get(i).price();
                 }
                 orderTotal.setText(String.valueOf(total));
+
             }
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
@@ -99,10 +100,14 @@ public class fragment_orders extends Fragment {
      * Links GUI elements to java file
      */
     private void linkValues(View view) {
-
+        pos=0;
         activity=(MainActivity) getActivity();
         orders= activity.getOrders();
-        phoneNumbers=activity.getNumberList();
+        orderList=orders.getOrders();
+        phoneNumbers=new ArrayList<String>();
+        for(int i=0;i<orderList.size();i++){
+            phoneNumbers.add(orderList.get(i).getPhone());
+        }
         autoCompleteTextView = (Spinner) view.findViewById(R.id.autoCompleteTextView);
         adapterItems = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item , phoneNumbers);
         autoCompleteTextView.setAdapter(adapterItems);
@@ -118,24 +123,26 @@ public class fragment_orders extends Fragment {
      */
     public void delete(){
         String message = "Must Select A Phone Number";
-        if (currentNumber == null){
-            int offset=0;
+        if (pos == none){
             Toast toast=Toast.makeText(getActivity(),message, Toast.LENGTH_LONG);
             toast.show();
         }
         else {
-            adapterItems.remove(currentNumber);
+            phoneNumbers.remove(pos);
+            adapterItems = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item, phoneNumbers);
             adapterItems.notifyDataSetChanged();
             autoCompleteTextView.setAdapter(adapterItems);
-            autoCompleteTextView.setSelection(-1);
-            orders.removeOrder(currentNumber);
+            autoCompleteTextView.setSelection(none);
+            orderList.remove(pos);
             activity.setOrders(orders);
-            phoneNumbers.remove(currentNumber);
-            activity.setNumberList(phoneNumbers);
-            phoneTextView.setText("");
-            currentNumber = null;
+            String blank = "";
+            phoneTextView.setText(blank);
+            pos = -1;
+            autoCompleteTextView.setSelection(none);
+            orders.setOrders(orderList);
+            activity.setOrders(orders);
+            orderTotal.setText(String.valueOf(zero));
         }
-        orderTotal.setText(String.valueOf(zero));
     }
 
 }

@@ -94,10 +94,10 @@ public class OrderingActivity extends AppCompatActivity {
         try {
             data.getSerializableExtra("Order");
             order = (Order) data.getSerializableExtra("Order");
-            System.out.println("ACTIVITY: " + order);
+
         }
         catch(Exception e){
-            System.out.println("ACTIVITY: " + "empty");
+
         }
     }
 
