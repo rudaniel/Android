@@ -22,6 +22,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import project4.Order;
@@ -52,6 +53,7 @@ public class fragment_orders extends Fragment {
 
     ArrayList <String> phoneNumbers =  new ArrayList<String>();
     StoreOrders orders;
+    private static final  double taxAmount = 1.06625;
     ArrayList<Order> orderList=new ArrayList<Order>();
     Spinner autoCompleteTextView;
     ArrayAdapter<String> adapterItems;
@@ -62,6 +64,7 @@ public class fragment_orders extends Fragment {
     int pos = -1;
     MainActivity activity=null;
     final double zero =0;
+    private static final DecimalFormat df = new DecimalFormat("0.00");
 
     /**
      * Will control all buttons and functions with listeners.
@@ -81,7 +84,8 @@ public class fragment_orders extends Fragment {
                 for(int i = 0; i<pizzaTemp.size(); i++){
                     total += pizzaTemp.get(i).price();
                 }
-                orderTotal.setText(String.valueOf(total));
+                total = total * taxAmount;
+                orderTotal.setText(df.format(total));
 
             }
             @Override

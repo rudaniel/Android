@@ -70,6 +70,16 @@ public class CustomizeActivity extends AppCompatActivity {
 
         make();
 
+        if(pizza.equals(deluxe)){
+            toppingsEditor.setItemChecked(, true);
+        }
+        else if(pizza.equals(hawaiian)){
+
+        }
+        else if(pizza.equals(pepperoni)){
+
+        }
+
         addToOrderButton.setOnClickListener(new View.OnClickListener() { //When the button is clicked the method will run.
             public void onClick(View v){
               order();
