@@ -24,71 +24,74 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import project4.Order;
+import project4.Pizza;
 import project4.StoreOrders;
 
-
+/**
+ * Controls the fragment order page.
+ * @author Manav Bali
+ * @author Daniel Lopez
+ */
 public class fragment_orders extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-//    private static final String ARG_PARAM1 = "param1";
-//    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-//    private String mParam1;
-//    private String mParam2;
-
+    /**
+     * Default constructor.
+     */
     public fragment_orders() {
         // Required empty public constructor
     }
 
-
-    // TODO: Rename and change types and number of parameters
-//    public static fragment_orders newInstance(String param1, String param2) {
-//        fragment_orders fragment = new fragment_orders();
-//        Bundle args = new Bundle();
-//        args.putString(ARG_PARAM1, param1);
-//        args.putString(ARG_PARAM2, param2);
-//        fragment.setArguments(args);
-//        return fragment;
-//    }
-
+    /**
+     * Get the current instance.
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        if (getArguments() != null) {
-//            mParam1 = getArguments().getString(ARG_PARAM1);
-//            mParam2 = getArguments().getString(ARG_PARAM2);
-//        }
     }
 
     ArrayList <String> phoneNumbers =  new ArrayList<String>();
     StoreOrders orders;
-    Spinner autoTextView;
+    Spinner autoCompleteTextView;
     ArrayAdapter<String> adapterItems;
     TextView phoneTextView;
+    TextView orderTotal;
     Button deleteButton;
     String currentNumber = null;
     MainActivity activity=null;
+    final double zero =0;
 
-
+    /**
+     * Will control all buttons and functions with listeners.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_orders, container, false);
         activity=(MainActivity) getActivity();
         orders= activity.getOrders();
         phoneNumbers=activity.getNumberList();
-        autoTextView = (Spinner) view.findViewById(R.id.autoCompleteTextView);
+        autoCompleteTextView = (Spinner) view.findViewById(R.id.autoCompleteTextView);
         adapterItems = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item , phoneNumbers);
-        autoTextView.setAdapter(adapterItems);
+        autoCompleteTextView.setAdapter(adapterItems);
         phoneTextView = (TextView) view.findViewById(R.id.phoneTextView);
+        orderTotal = (TextView) view.findViewById(R.id.orderTotal);
         deleteButton = (Button) view.findViewById(R.id.deleteButton);
         phoneTextView.setMovementMethod(new ScrollingMovementMethod());
-        autoTextView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        orderTotal.setText(String.valueOf(zero));
+        autoCompleteTextView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                currentNumber = autoTextView.getItemAtPosition(position).toString();
+                currentNumber = autoCompleteTextView.getItemAtPosition(position).toString();
                 phoneTextView.setText(orders.getOrder(currentNumber).toString());
+                Order temp;
+                temp = orders.getOrder(currentNumber);
+                ArrayList<Pizza> pizzaTemp;
+                pizzaTemp = temp.getPizzas();
+                double total = 0;
+                for(int i = 0; i<pizzaTemp.size(); i++){
+                    total += pizzaTemp.get(i).price();
+                }
+                orderTotal.setText(String.valueOf(total));
             }
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
@@ -96,27 +99,35 @@ public class fragment_orders extends Fragment {
         });
         deleteButton .setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
-                String message = "Must Select A Phone Number";
-                if (currentNumber == null){
-                    int offset=0;
-                    Toast toast=Toast.makeText(getActivity(),message, Toast.LENGTH_LONG);
-                    toast.show();
-                }
-                else {
-                    adapterItems.remove(currentNumber);
-                    adapterItems.notifyDataSetChanged();
-                    autoTextView.setAdapter(adapterItems);
-                    autoTextView.setSelection(-1);
-                    orders.removeOrder(currentNumber);
-                    activity.setOrders(orders);
-                    phoneNumbers.remove(currentNumber);
-                    activity.setNumberList(phoneNumbers);
-                    phoneTextView.setText("");
-                    currentNumber = null;
-                }
+                delete();
             }
         });
-
         return view;
     }
+
+    /**
+     * Deletes the order when a button is clicked.
+     */
+    public void delete(){
+        String message = "Must Select A Phone Number";
+        if (currentNumber == null){
+            int offset=0;
+            Toast toast=Toast.makeText(getActivity(),message, Toast.LENGTH_LONG);
+            toast.show();
+        }
+        else {
+            adapterItems.remove(currentNumber);
+            adapterItems.notifyDataSetChanged();
+            autoCompleteTextView.setAdapter(adapterItems);
+            autoCompleteTextView.setSelection(-1);
+            orders.removeOrder(currentNumber);
+            activity.setOrders(orders);
+            phoneNumbers.remove(currentNumber);
+            activity.setNumberList(phoneNumbers);
+            phoneTextView.setText("");
+            currentNumber = null;
+        }
+        orderTotal.setText(String.valueOf(zero));
+    }
+
 }
