@@ -63,6 +63,7 @@ public class fragment_current extends Fragment {
     Pizza currentPizza=null;
     Button placeOrderButton;
     Button removePizzaButton;
+    Button cancel;
     TextView subTotalView;
     TextView salesTaxView;
     TextView orderTotalView;
@@ -112,6 +113,12 @@ public class fragment_current extends Fragment {
                 placeOrder();
             }
         });
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v){
+                getActivity().finish();
+            }
+        });
         calculateTotals();
         return view;
     }
@@ -157,6 +164,7 @@ public class fragment_current extends Fragment {
         orderTotalView = (TextView) view.findViewById(R.id.orderTotalView);
         placeOrderButton = (Button) view.findViewById(R.id.placeOrderButton);
         removePizzaButton = (Button) view.findViewById(R.id.removePizzaButton);
+        cancel=(Button) view.findViewById(R.id.button5);
     }
 
     /**
