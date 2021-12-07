@@ -164,6 +164,7 @@ public class CustomizeActivity extends AppCompatActivity {
             toppingsEditor.setItemChecked(i,selected);
         }
         addToOrderButton = (Button) findViewById(R.id.addToOrderButton);
+        livePrice.setText("yees");
     }
 
     /**
