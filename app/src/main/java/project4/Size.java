@@ -8,5 +8,5 @@ import java.io.Serializable;
  * @author Daniel Lopez
  */
 public enum Size implements Serializable {
-	Small, Medium, Large;
+	Small, Medium, Large
 }

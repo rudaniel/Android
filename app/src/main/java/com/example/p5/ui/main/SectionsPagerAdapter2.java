@@ -42,6 +42,7 @@ public class SectionsPagerAdapter2 extends FragmentPagerAdapter {
     /**
      * Sets the fragment based on the item.
      */
+    @NonNull
     @Override
     public Fragment getItem(int position) {
         Fragment fragment=null;
@@ -53,8 +54,6 @@ public class SectionsPagerAdapter2 extends FragmentPagerAdapter {
         else if(position==second){
             fragment= new fragment_current();
         }
-        // getItem is called to instantiate the fragment for the given page.
-        // Return a PlaceholderFragment (defined as a static inner class below).
         return fragment;
     }
 
@@ -72,7 +71,6 @@ public class SectionsPagerAdapter2 extends FragmentPagerAdapter {
      */
     @Override
     public int getCount() {
-        // Show 2 total pages.
         int num=2;
         return num;
     }

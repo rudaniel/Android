@@ -5,8 +5,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
-
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,16 +14,10 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-
-import project4.Deluxe;
-import project4.Hawaiian;
 import project4.Order;
-import project4.Pepperoni;
 import project4.Pizza;
-import project4.PizzaMaker;
 
 /**
  * Current orders based on current phone number.
@@ -34,7 +26,6 @@ import project4.PizzaMaker;
  */
 public class fragment_current extends Fragment {
     TextView phoneHolder;
-    TextView phoneTemp;
     String phoneNumber;
     static final String orderKey = "Order";
     static final String message1 = "Must Select A Pizza";
@@ -187,7 +178,6 @@ public class fragment_current extends Fragment {
      * Removes the pizza from the order and updates the pricing.
      */
     private void removePizza() {
-        int offset=0;
         if (currentPizza == null){
             Toast toast=Toast.makeText(getActivity(),message1, Toast.LENGTH_LONG);
             toast.show();
@@ -221,7 +211,6 @@ public class fragment_current extends Fragment {
      */
 
     private void error() {
-        int offset=0;
         Toast toast=Toast.makeText(getActivity(),message3, Toast.LENGTH_LONG);
         toast.show();
     }

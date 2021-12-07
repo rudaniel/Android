@@ -10,6 +10,6 @@ import java.io.Serializable;
 public enum Topping implements Serializable {
 
 	Pineapple, Ham, Cheese, Sausage, Chicken, Beef,
-	Pepperoni, GreenPepper, Onion, Mushroom, BlackOlives;
+	Pepperoni, GreenPepper, Onion, Mushroom, BlackOlives
 	
 }

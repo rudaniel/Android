@@ -14,17 +14,10 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Locale;
-
-import project4.Deluxe;
-import project4.Hawaiian;
 import project4.Order;
-import project4.Pepperoni;
 import project4.Pizza;
 import project4.PizzaMaker;
 import project4.Size;
@@ -37,12 +30,10 @@ import project4.Topping;
  */
 public class CustomizeActivity extends AppCompatActivity {
     ArrayAdapter<Size> sizes;
-    ArrayList<Size> s= new ArrayList<>(Arrays.asList(Size.values()));
     Spinner spinner;
     String pizza;
     ImageView image;
     TextView title;
-
     int counter=0;
     ListView toppingsEditor;
     ArrayList<Topping> toppings =  new ArrayList<Topping>();
@@ -50,7 +41,6 @@ public class CustomizeActivity extends AppCompatActivity {
     ArrayList<Topping> originalToppings =  new ArrayList<Topping>();
     ArrayAdapter<Topping> adapterTopping;
     Button addToOrderButton;
-   // Topping temp =  null;
     ArrayList<Topping> tempList =  new ArrayList<Topping>();
     Pizza finalPizza;
     Intent i=null;
@@ -167,7 +157,6 @@ public class CustomizeActivity extends AppCompatActivity {
      */
     public void order() {
         tempList.removeAll(Collections.singleton(null));
-        //finalPizza = makePizza(tempList);
         order.addPizza(finalPizza);
         Intent send= new Intent();
         send.putExtra("Order", order);

@@ -5,15 +5,11 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import project4.Order;
@@ -25,10 +21,6 @@ import project4.Order;
  */
 public class fragment_login extends Fragment {
 
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-    private String mParam1;
-    private String mParam2;
     EditText editTextPhone;
     String phoneNumberString;
     Button button4;
@@ -46,28 +38,11 @@ public class fragment_login extends Fragment {
     }
 
     /**
-     * Creates an new instance.
-     */
-    public static fragment_login newInstance(String param1, String param2) {
-        fragment_login fragment = new fragment_login();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    /**
      * Creates the page.
      */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-
-        }
     }
 
     /**
@@ -75,7 +50,6 @@ public class fragment_login extends Fragment {
      */
     public boolean alert(String phoneNumberString) {
         if(!phoneCheck(phoneNumberString)) {
-            int offset=0;
             Toast toast=Toast.makeText(getActivity(),message, Toast.LENGTH_LONG);
             toast.show();
             return false;
@@ -133,10 +107,8 @@ public class fragment_login extends Fragment {
                 try {
                     data.getSerializableExtra(orderKey);
                     order=(Order) data.getSerializableExtra(orderKey);
-
                 }
                 catch(Exception e){
-
                 }
             }
         }

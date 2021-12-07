@@ -54,19 +54,6 @@ public class Order implements Serializable {
 	}
 	
 	/**
-	 * Calculated the subtotal for all the pizzas in the list.
-	 * @param pizzas list of pizzas.
-	 * @return total price of all pizzas.
-	 */
-	public double subTotal(ArrayList<Pizza> pizzas) {
-		double total = 0;
-		for(int i =0; i < pizzas.size(); i++) {
-			total += (pizzas.get(i).price());
-		}
-		return total;
-	}
-	
-	/**
 	 * Used to check if the object is equal to current pizza instance.
 	 * @return true if equal, false otherwise.
 	 */

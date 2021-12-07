@@ -1,6 +1,5 @@
 package com.example.p5;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -11,10 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import project4.Order;
 
@@ -41,15 +37,6 @@ public class fragment_menu extends Fragment {
     static final String pepperoniKey = "Pepperoni";
     static final String fragKey =  "FRAGMENT: ";
     static final String emptyKey =  "empty";
-    /**
-     * Sets the fragment.
-     */
-    public static fragment_menu newInstance(String param1, String param2) {
-        fragment_menu fragment = new fragment_menu();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     /**
      * Default constructor.

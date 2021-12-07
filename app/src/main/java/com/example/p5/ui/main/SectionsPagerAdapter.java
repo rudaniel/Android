@@ -11,13 +11,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.p5.R;
-import com.example.p5.fragment_current;
 import com.example.p5.fragment_login;
 import com.example.p5.fragment_orders;
 
 import java.util.ArrayList;
-
-import project4.StoreOrders;
 
 /**
  * A [FragmentPagerAdapter] that returns a fragment corresponding to
@@ -44,6 +41,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     /**
      * Sets the fragment based on the item.
      */
+    @NonNull
     @Override
     public Fragment getItem(int position) {
         Fragment fragment=null;
@@ -55,8 +53,6 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         else if(position==second){
             fragment= new fragment_orders();
         }
-        // getItem is called to instantiate the fragment for the given page.
-        // Return a PlaceholderFragment (defined as a static inner class below).
         return fragment;
     }
 
