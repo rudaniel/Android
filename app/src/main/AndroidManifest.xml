@@ -13,12 +13,14 @@
             android:name=".CustomizeActivity"
             android:exported="false"
             android:theme="@style/Theme.P5.NoActionBar"
+            android:parentActivityName="com.example.p5.OrderingActivity"
             android:screenOrientation="nosensor"/>
         <activity
             android:name=".OrderingActivity"
             android:exported="false"
             android:label="@string/app_name"
             android:theme="@style/Theme.P5.NoActionBar"
+            android:parentActivityName="com.example.p5.MainActivity"
             android:screenOrientation="nosensor"/>
         <activity
             android:name=".MainActivity"
