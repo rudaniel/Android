@@ -132,20 +132,27 @@ public class fragment_orders extends Fragment {
             toast.show();
         }
         else {
-            phoneNumbers.remove(pos);
-            adapterItems = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item, phoneNumbers);
-            adapterItems.notifyDataSetChanged();
-            autoCompleteTextView.setAdapter(adapterItems);
-            autoCompleteTextView.setSelection(none);
-            orderList.remove(pos);
-            activity.setOrders(orders);
-            String blank = "";
-            phoneTextView.setText(blank);
-            pos = -1;
-            autoCompleteTextView.setSelection(none);
-            orders.setOrders(orderList);
-            activity.setOrders(orders);
-            orderTotal.setText(String.valueOf(zero));
+            try{
+                phoneNumbers.remove(pos);
+                adapterItems = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item, phoneNumbers);
+                adapterItems.notifyDataSetChanged();
+                autoCompleteTextView.setAdapter(adapterItems);
+                autoCompleteTextView.setSelection(none);
+                orderList.remove(pos);
+                activity.setOrders(orders);
+                String blank = "";
+                phoneTextView.setText(blank);
+                pos = -1;
+                autoCompleteTextView.setSelection(none);
+                orders.setOrders(orderList);
+                activity.setOrders(orders);
+                orderTotal.setText(String.valueOf(zero));
+            }
+            catch(Exception e){
+                message="No Order Selected, Select an Order or Start a New One!";
+                Toast toast=Toast.makeText(getActivity(),message, Toast.LENGTH_LONG);
+                toast.show();
+            }
         }
     }
 
