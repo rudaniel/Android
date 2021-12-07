@@ -42,12 +42,7 @@ public class CustomizeActivity extends AppCompatActivity {
     String pizza;
     ImageView image;
     TextView title;
-//    private static final String deluxe="Deluxe";
-//    private static final String hawaiian="Hawaiian";
-//    private static final String pepperoni="Pepperoni";
 
-//    TextView phoneHolder;
-//    String phoneNumber;
     int counter=0;
     ListView toppingsEditor;
     ArrayList<Topping> toppings =  new ArrayList<Topping>();
@@ -164,7 +159,7 @@ public class CustomizeActivity extends AppCompatActivity {
             toppingsEditor.setItemChecked(i,selected);
         }
         addToOrderButton = (Button) findViewById(R.id.addToOrderButton);
-        livePrice.setText("yees");
+        livePrice.setText(String.valueOf(finalPizza.price()));
     }
 
     /**
