@@ -19,12 +19,14 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Locale;
 
 import project4.Deluxe;
 import project4.Hawaiian;
 import project4.Order;
 import project4.Pepperoni;
 import project4.Pizza;
+import project4.PizzaMaker;
 import project4.Size;
 import project4.Topping;
 
@@ -40,20 +42,21 @@ public class CustomizeActivity extends AppCompatActivity {
     String pizza;
     ImageView image;
     TextView title;
-    private static final String deluxe="Deluxe";
-    private static final String hawaiian="Hawaiian";
-    private static final String pepperoni="Pepperoni";
+//    private static final String deluxe="Deluxe";
+//    private static final String hawaiian="Hawaiian";
+//    private static final String pepperoni="Pepperoni";
 
-    //daniel
-    TextView phoneHolder;
-    String phoneNumber;
+//    TextView phoneHolder;
+//    String phoneNumber;
+    int counter=0;
     ListView toppingsEditor;
     ArrayList<Topping> toppings =  new ArrayList<Topping>();
+    ArrayList<Topping> additional =  new ArrayList<Topping>();
+    ArrayList<Topping> originalToppings =  new ArrayList<Topping>();
     ArrayAdapter<Topping> adapterTopping;
     Button addToOrderButton;
-    Topping temp =  null;
+   // Topping temp =  null;
     ArrayList<Topping> tempList =  new ArrayList<Topping>();
-    String[] message = new String[11];
     Pizza finalPizza;
     Intent i=null;
     Order order=null;
@@ -67,20 +70,10 @@ public class CustomizeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setTheme(android.R.style.Theme);
         setContentView(R.layout.activity_customize);
-
         make();
 
-        if(pizza.equals(deluxe)){
-            toppingsEditor.setItemChecked(, true);
-        }
-        else if(pizza.equals(hawaiian)){
 
-        }
-        else if(pizza.equals(pepperoni)){
-
-        }
-
-        addToOrderButton.setOnClickListener(new View.OnClickListener() { //When the button is clicked the method will run.
+        addToOrderButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
               order();
             }
@@ -88,22 +81,57 @@ public class CustomizeActivity extends AppCompatActivity {
         toppingsEditor.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                topping(position);
+                toppingsManager(position);
             }
         });
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Pizza temp = makePizza(tempList);
-                livePrice.setText(String.valueOf(temp.price()));
+                finalPizza.setSize((Size)spinner.getSelectedItem());
+                calculatePrice();
 
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                Pizza temp = makePizza(tempList);
-                livePrice.setText(String.valueOf(temp.price()));
+                String message = "Nothing Selected";
+                Toast toast = Toast.makeText(CustomizeActivity.this, message, Toast.LENGTH_LONG);
+                toast.show();
             }
         });
+    }
+
+    /**
+     * Removes or adds toppings to selected toppings list based on if its already contained in it.
+     */
+    private void toppingsManager(int position) {
+        boolean deselect=false;
+        int max=7;
+        Topping temp=(Topping) toppingsEditor.getItemAtPosition(position);
+        if(originalToppings.contains(temp)) {
+            originalToppings.remove(temp);
+            counter--;
+            calculatePrice();
+        }
+        else{
+            if (counter == max) {
+                String message = "Maximum Number of Toppings is 7!";
+                toppingsEditor.setItemChecked(position, deselect);
+                Toast toast = Toast.makeText(CustomizeActivity.this, message, Toast.LENGTH_LONG);
+                toast.show();
+            } else {
+                originalToppings.add(temp);
+                counter++;
+                calculatePrice();
+            }
+        }
+    }
+
+    /**
+     * Calculates price of pizza based on selected toppings.
+     */
+    private void calculatePrice() {
+        finalPizza.setToppings(originalToppings);
+        livePrice.setText(String.valueOf(finalPizza.price()));
     }
 
     /**
@@ -112,6 +140,7 @@ public class CustomizeActivity extends AppCompatActivity {
     public void make() {
         i=getIntent();
         pizza= i.getExtras().getString("pizza");
+        finalPizza=PizzaMaker.createPizza(pizza);
         order=(Order) i.getSerializableExtra("Order");
         sizes=new ArrayAdapter<>(this, R.layout.spinner_item , Arrays.asList(Size.values()));
         title=(TextView) findViewById(R.id.textView4);
@@ -121,26 +150,20 @@ public class CustomizeActivity extends AppCompatActivity {
         imageSet();
         spinner.setAdapter(sizes);
         toppingsEditor = (ListView) findViewById(R.id.toppingsEditor);
-        Collections.addAll(toppings, project4.Topping.Pineapple, project4.Topping.Ham, project4.Topping.Cheese, project4.Topping.Sausage, project4.Topping.Chicken, project4.Topping.Beef, project4.Topping.Pepperoni, project4.Topping.GreenPepper, project4.Topping.Onion, project4.Topping.Mushroom, project4.Topping.BlackOlives);
+        originalToppings=finalPizza.getToppings();
+        additional= new ArrayList<>(Arrays.asList(Topping.values()));
+        additional.removeAll(originalToppings);
+        toppings.addAll(originalToppings);
+        toppings.addAll(additional);
         adapterTopping = new ArrayAdapter<>(this,  android.R.layout.simple_list_item_multiple_choice , toppings);
         toppingsEditor.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         toppingsEditor.setAdapter(adapterTopping);
+        boolean selected=true;
+        counter=originalToppings.size();
+        for(int i=0; i<counter;i++){
+            toppingsEditor.setItemChecked(i,selected);
+        }
         addToOrderButton = (Button) findViewById(R.id.addToOrderButton);
-    }
-
-    /**
-     * Stores the toppings.
-     */
-    public void topping(int position) {
-        temp = (Topping) (toppingsEditor.getItemAtPosition(position));
-        if(tempList.contains(temp)){
-            tempList.remove(temp);
-        }
-        else{
-            tempList.add(temp);
-        }
-        Pizza temp = makePizza(tempList);
-        livePrice.setText(String.valueOf(temp.price()));
     }
 
     /**
@@ -148,7 +171,7 @@ public class CustomizeActivity extends AppCompatActivity {
      */
     public void order() {
         tempList.removeAll(Collections.singleton(null));
-        finalPizza = makePizza(tempList);
+        //finalPizza = makePizza(tempList);
         order.addPizza(finalPizza);
         Intent send= new Intent();
         send.putExtra("Order", order);
@@ -160,45 +183,12 @@ public class CustomizeActivity extends AppCompatActivity {
      * Based on type of pizza that is being made the picture will represent that.
      */
     public void imageSet() {
-        String uri="";
-        if(pizza.equals(deluxe)){
-            uri = "@drawable/deluxe";
-            title.setText(deluxe);
-        }
-        else if(pizza.equals(hawaiian)){
-            uri = "@drawable/hawaiian";
-            title.setText(hawaiian);
-        }
-        else if(pizza.equals(pepperoni)){
-            uri = "@drawable/pepperoni";
-            title.setText(pepperoni);
-        }
+        int start=0;
+        int end=1;
+        String uri="@drawable/"+pizza.substring(start,end).toLowerCase()+pizza.substring(end);
+        title.setText(pizza);
         int imageResource = getResources().getIdentifier(uri, null, getPackageName());
         Drawable res = getResources().getDrawable(imageResource);
         image.setImageDrawable(res);
-    }
-
-    /**
-     * Creates the pizza with inputted toppings.
-     */
-    public Pizza makePizza(ArrayList<Topping> toppings) {
-        Pizza currentPie = null;
-        Size tempSize = (Size) spinner.getSelectedItem();
-        if(pizza.equals(deluxe)){
-            currentPie = new Deluxe();
-            currentPie.setToppings(toppings);
-            currentPie.setSize(tempSize);
-        }
-        else if(pizza.equals(hawaiian)){
-            currentPie = new Hawaiian();
-            currentPie.setToppings(toppings);
-            currentPie.setSize(tempSize);
-        }
-        else if(pizza.equals(pepperoni)){
-            currentPie = new Pepperoni();
-            currentPie.setToppings(toppings);
-            currentPie.setSize(tempSize);
-        }
-        return currentPie;
     }
 }
