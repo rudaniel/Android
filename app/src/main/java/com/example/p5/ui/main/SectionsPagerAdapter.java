@@ -22,6 +22,8 @@ import project4.StoreOrders;
 /**
  * A [FragmentPagerAdapter] that returns a fragment corresponding to
  * one of the sections/tabs/pages.
+ * @author Manav Bali
+ * @author Daniel Lopez
  */
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
@@ -30,12 +32,18 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     private final Context mContext;
     private ArrayList<String> fragments;
 
+    /**
+     * set context to fragment.
+     */
     public SectionsPagerAdapter(Context context, FragmentManager fm) {
         super(fm);
         fragments=new ArrayList<String>();
         mContext = context;
     }
 
+    /**
+     * Sets the fragment based on the item.
+     */
     @Override
     public Fragment getItem(int position) {
         Fragment fragment=null;
@@ -52,12 +60,18 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         return fragment;
     }
 
+    /**
+     * Get position.
+     */
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
         return mContext.getResources().getString(TAB_TITLES[position]);
     }
 
+    /**
+     * Get count.
+     */
     @Override
     public int getCount() {
         // Show 2 total pages.
@@ -65,6 +79,9 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         return num;
     }
 
+    /**
+     * Get fragment.
+     */
     public String getFragment(int tab){
         String tabName=fragments.get(tab);
         if(tabName!=null){
@@ -73,6 +90,9 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         return null;
     }
 
+    /**
+     * Get the item.
+     */
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {

@@ -30,6 +30,9 @@ public class SectionsPagerAdapter2 extends FragmentPagerAdapter {
 
     private ArrayList<String> fragments;
 
+    /**
+     * set context to fragment.
+     */
     public SectionsPagerAdapter2(Context context, FragmentManager fm) {
         super(fm);
         fragments=new ArrayList<String>();
