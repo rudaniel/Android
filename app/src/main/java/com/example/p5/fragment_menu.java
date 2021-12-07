@@ -34,7 +34,13 @@ public class fragment_menu extends Fragment {
     Button pepperoni;
     TextView phoneHolder;
     String phoneNumber=null;
-
+    static final String pizzaKey = "pizza";
+    static final String deluxeKey = "Deluxe";
+    static final String orderKey = "Order";
+    static final String hawaiianKey = "Hawaiian";
+    static final String pepperoniKey = "Pepperoni";
+    static final String fragKey =  "FRAGMENT: ";
+    static final String emptyKey =  "empty";
     /**
      * Sets the fragment.
      */
@@ -72,8 +78,8 @@ public class fragment_menu extends Fragment {
         deluxe.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
                 Intent i = new Intent(getActivity(), CustomizeActivity.class);
-                i.putExtra("pizza","Deluxe");
-                i.putExtra("Order",order);
+                i.putExtra(pizzaKey,deluxeKey);
+                i.putExtra(orderKey,order);
                 startActivityForResult(i,request);
             }
         });
@@ -81,8 +87,8 @@ public class fragment_menu extends Fragment {
         hawaiian.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
                 Intent i = new Intent(getActivity(), CustomizeActivity.class);
-                i.putExtra("pizza","Hawaiian");
-                i.putExtra("Order",order);
+                i.putExtra(pizzaKey,hawaiianKey);
+                i.putExtra(orderKey,order);
                 startActivityForResult(i,request);
             }
         });
@@ -90,8 +96,8 @@ public class fragment_menu extends Fragment {
         pepperoni.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v){
                 Intent i = new Intent(getActivity(), CustomizeActivity.class);
-                i.putExtra("pizza","Pepperoni");
-                i.putExtra("Order",order);
+                i.putExtra(pizzaKey,pepperoniKey);
+                i.putExtra(orderKey,order);
                 startActivityForResult(i,request);
             }
         });
@@ -107,12 +113,12 @@ public class fragment_menu extends Fragment {
         if(requestCode==request){
             if(resultCode==result){
                 try {
-                    data.getSerializableExtra("Order");
-                order=(Order) data.getSerializableExtra("Order");
-                System.out.println("FRAGMENT: "+order);
+                    data.getSerializableExtra(orderKey);
+                order=(Order) data.getSerializableExtra(orderKey);
+                System.out.println(fragKey+order);
                 }
                 catch(Exception e){
-                    System.out.println("FRAGMENT: " + "empty");
+                    System.out.println(fragKey + emptyKey);
                 }
             }
         }

@@ -81,7 +81,7 @@ public class fragment_orders extends Fragment {
                 pizzaTemp = orderList.get(position).getPizzas();
                 phoneTextView.setText(pizzaTemp.toString());
                 double total = 0;
-                for(int i = 0; i<pizzaTemp.size(); i++){
+                for(int i = 0; i < pizzaTemp.size(); i++){
                     total += pizzaTemp.get(i).price();
                 }
                 total = total * taxAmount;
@@ -109,7 +109,7 @@ public class fragment_orders extends Fragment {
         orders= activity.getOrders();
         orderList=orders.getOrders();
         phoneNumbers=new ArrayList<String>();
-        for(int i=0;i<orderList.size();i++){
+        for(int i = 0; i < orderList.size();i++){
             phoneNumbers.add(orderList.get(i).getPhone());
         }
         autoCompleteTextView = (Spinner) view.findViewById(R.id.autoCompleteTextView);

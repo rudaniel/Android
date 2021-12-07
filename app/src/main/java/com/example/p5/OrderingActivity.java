@@ -33,6 +33,10 @@ public class OrderingActivity extends AppCompatActivity {
     private ActivityOrderingBinding binding;
     TextView editTextPhone2;
     Order order;
+    static final String keyNumber = "number";
+    static final String ownActionKey = "Replace with your own action";
+    static final String actionKey = "Action";
+    static final String orderKey = "Order";
 
     /**
      * Setting the theme of the page and getting intent.
@@ -45,7 +49,7 @@ public class OrderingActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         Intent i=getIntent();
         editTextPhone2=(TextView)  findViewById(R.id.editTextPhone2);
-        String number= i.getExtras().getString("number");
+        String number= i.getExtras().getString(keyNumber);
         order=new Order(number);
         editTextPhone2.setText(number);
         SectionsPagerAdapter2 sectionsPagerAdapter = new SectionsPagerAdapter2(this, getSupportFragmentManager());
@@ -79,8 +83,8 @@ public class OrderingActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Snackbar.make(view, ownActionKey, Snackbar.LENGTH_LONG)
+                        .setAction(actionKey, null).show();
             }
         });
     }
@@ -92,8 +96,8 @@ public class OrderingActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         try {
-            data.getSerializableExtra("Order");
-            order = (Order) data.getSerializableExtra("Order");
+            data.getSerializableExtra(orderKey);
+            order = (Order) data.getSerializableExtra(orderKey);
 
         }
         catch(Exception e){

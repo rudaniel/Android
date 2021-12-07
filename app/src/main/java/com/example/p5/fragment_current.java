@@ -36,7 +36,10 @@ public class fragment_current extends Fragment {
     TextView phoneHolder;
     TextView phoneTemp;
     String phoneNumber;
-
+    static final String orderKey = "Order";
+    static final String message1 = "Must Select A Pizza";
+    static final String message2 = "Order is Incomplete, Finish Order or Press Cancel Order.";
+    static final String message3 = "Order is Currently Empty, Add Pizzas!";
 
     /**
      * Default constructor.
@@ -124,7 +127,7 @@ public class fragment_current extends Fragment {
             }
             else{
                 Intent send= new Intent();
-                send.putExtra("Order", order);
+                send.putExtra(orderKey, order);
                 getActivity().setResult(Activity.RESULT_OK, send);
                 getActivity().finish();
             }
@@ -138,8 +141,7 @@ public class fragment_current extends Fragment {
      * Error message.
      */
     private void errorOrder() {
-        String message = "Order is Incomplete, Finish Order or Press Cancel Order.";
-        Toast toast=Toast.makeText(getActivity(),message, Toast.LENGTH_LONG);
+        Toast toast=Toast.makeText(getActivity(),message2, Toast.LENGTH_LONG);
         toast.show();
     }
 
@@ -179,8 +181,7 @@ public class fragment_current extends Fragment {
     private void removePizza() {
         int offset=0;
         if (currentPizza == null){
-            String message = "Must Select A Pizza";
-            Toast toast=Toast.makeText(getActivity(),message, Toast.LENGTH_LONG);
+            Toast toast=Toast.makeText(getActivity(),message1, Toast.LENGTH_LONG);
             toast.show();
         }
         else {
@@ -213,8 +214,7 @@ public class fragment_current extends Fragment {
 
     private void error() {
         int offset=0;
-        String message="Order is Currently Empty, Add Pizzas!";
-        Toast toast=Toast.makeText(getActivity(),message, Toast.LENGTH_LONG);
+        Toast toast=Toast.makeText(getActivity(),message3, Toast.LENGTH_LONG);
         toast.show();
     }
 

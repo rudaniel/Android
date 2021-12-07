@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private StoreOrders orders = new StoreOrders();
     Order order;
+    static final String orderKey = "Order";
 
     /**
      * Sets the Theme/Environment.
@@ -81,8 +82,8 @@ public class MainActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         try {
-            data.getSerializableExtra("Order");
-            order = (Order) data.getSerializableExtra("Order");
+            data.getSerializableExtra(orderKey);
+            order = (Order) data.getSerializableExtra(orderKey);
             orders.addOrder(order);
         }
         catch(Exception e){

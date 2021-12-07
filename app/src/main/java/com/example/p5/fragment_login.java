@@ -35,6 +35,9 @@ public class fragment_login extends Fragment {
     Order order=null;
     private static final int request=0;
     private static final int result=-1;
+    static final String message="Enter Valid Phone number";
+    static final String numberKey = "number";
+    static final String orderKey = "Order";
 
     /**
      * Required empty public constructor
@@ -73,7 +76,6 @@ public class fragment_login extends Fragment {
     public boolean alert(String phoneNumberString) {
         if(!phoneCheck(phoneNumberString)) {
             int offset=0;
-            String message="Enter Valid Phone number";
             Toast toast=Toast.makeText(getActivity(),message, Toast.LENGTH_LONG);
             toast.show();
             return false;
@@ -110,7 +112,7 @@ public class fragment_login extends Fragment {
                     int request=0;
                     String empty="";
                     Intent i = new Intent(getActivity(), OrderingActivity.class);
-                    i.putExtra("number",phoneNumberString);
+                    i.putExtra(numberKey , phoneNumberString);
                     startActivityForResult(i,request);
                     phoneNumberString=empty;
                     editTextPhone.setText(empty);
@@ -129,8 +131,8 @@ public class fragment_login extends Fragment {
         if(requestCode==request){
             if(resultCode==result){
                 try {
-                    data.getSerializableExtra("Order");
-                    order=(Order) data.getSerializableExtra("Order");
+                    data.getSerializableExtra(orderKey);
+                    order=(Order) data.getSerializableExtra(orderKey);
 
                 }
                 catch(Exception e){
